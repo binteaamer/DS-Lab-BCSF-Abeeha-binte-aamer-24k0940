@@ -1,5 +1,5 @@
 Q1
-//Q1. Suppose you are developing a bank account management system, and you have defined the
+/*Q1. Suppose you are developing a bank account management system, and you have defined the
 BankAccount class with the required constructors. You need to demonstrate the use of these
 constructors in various scenarios.
 1. Default Constructor Usage: Create a default-initialized BankAccount object named
@@ -10,7 +10,7 @@ an initial balance of $1000. Print out the balance of account2.
 BankAccount object named account3 using the copy constructor. Deduct $200 from
 account3 and print out its balance. Also, print out the balance of account2 to ensure it
 hasn't been affected by the transaction involving account3.
-
+*/
 
 code: 
 
