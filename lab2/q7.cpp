@@ -39,7 +39,7 @@ int main() {
             continue;}
 
         int maxsalary = salaries[i][0];
-        long long sum = salaries[i][0];
+        double = salaries[i][0];
 
         for (int j = 1; j < sizes[i]; j++) {
             if (salaries[i][j] > maxsalary)
