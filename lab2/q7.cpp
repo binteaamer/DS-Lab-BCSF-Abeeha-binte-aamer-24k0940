@@ -1,3 +1,13 @@
+/*A company has multiple departments, each department has a different number of employees.
+=> Use a jagged array where each row corresponds to a department and columns store employee
+salaries.
+Calculate:
+-> The highest salary in each department.
+-> The department with the overall maximum average salary.
+
+*/
+
+//code
 #include <iostream>
 using namespace std;
 int main(){
