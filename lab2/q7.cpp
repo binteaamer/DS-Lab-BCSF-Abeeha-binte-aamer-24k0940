@@ -1,71 +1,60 @@
-q7
-/*A company has multiple departments, each department has a different number of employees.
-=> Use a jagged array where each row corresponds to a department and columns store employee
-salaries.
-Calculate:
--> The highest salary in each department.
--> The department with the overall maximum average salary.*/
-
-
-//code 
 #include <iostream>
 using namespace std;
+int main(){
+int departments;
+cout<<" enter number of departments"<<endl;
+cin>>departments;
 
-int main() {
-    int d;
-    cout << "enter number of departments: ";
-    cin >> d;
+int** salaries = new int*[departments];
+int* employees = new int[departments];
 
-    int* sizes = new int[d];
-    int** salaries = new int*[d];
+for(int i=0; i<departments; i++){
+cout<<" enter number of employees for department "<<i<<endl;
+cin>>employees[i];
+salaries[i] = new int[employees[i]];
 
-    for (int i = 0; i < d; i++) {
-    cout << "enter number of employees in department " << i << ": ";
-    cin >> sizes[i];
+cout<<"enter salary for department "<<i<<endl;
+for(int j=0; j<employees[i]; j++){
+cin>>salaries[i][j];
+}
+}
 
-    salaries[i] = new int[sizes[i]];
-    cout << "enter salaries for department " << i << ": ";
-        for (int j = 0; j < sizes[i]; j++) {
-            cin >> salaries[i][j];
-        }
-    }
+double bestaverage=-100000000000;
+int bestdepartment=-1;
 
-    double bestavg = -1000000000;
-    int bestdept = -1;
+for(int i=0; i<departments; i++){
+if(employees[i]==0){
+cout<<"department has no employee"<<endl;
+continue;
+}
 
-    for (int i = 0; i < d; i++) {
-        if (sizes[i] == 0) {
-            cout << "department " << i << " has no employees\n";
-            continue;}
+int maxsalary = salaries[i][0];
+double sum = salaries[i][0];
 
-        int maxsalary = salaries[i][0];
-        double = salaries[i][0];
+for(int j=1; j<employees[i]; j++){
+if(salaries[i][j] > maxsalary)
+maxsalary = salaries[i][j];
+sum += salaries[i][j];
+}
 
-        for (int j = 1; j < sizes[i]; j++) {
-            if (salaries[i][j] > maxsalary)
-            maxsalary = salaries[i][j];
-        sum += salaries[i][j];
-        }
+double avg = (double) sum / employees[i];
+cout<<"department "<<i<<" -> highest salary = "<<maxsalary<<", average salary = "<<avg<<endl;
 
-        double avg = (double) sum / sizes[i];
-        cout << "department " << i << " -> highest salary = " << maxsalary
-             << ", average salary = " << avg << endl;
+if(avg > bestaverage){
+bestaverage = avg;
+bestdepartment = i;
+}
+}
 
-        if (avg > bestavg) {
-            bestavg = avg;
-            bestdept = i;}
-        }
+if(bestdepartment != -1){
+cout<<"department with maximum average salary is "<<bestdepartment<<" (average = "<<bestaverage<<")\n";
+}
 
-    if (bestdept != -1) {
-    cout << "department with maximum average salary is " 
-        << bestdept << " (average = " << bestavg << ")\n";
-    }
+for(int i=0; i<departments; i++){
+delete[] salaries[i];
+}
+delete[] salaries;
+delete[] employees;
 
-    for (int i = 0; i < d; i++) {
-        delete[] salaries[i];
-    }
-    delete[] salaries;
-    delete[] sizes;
-
-    return 0;
+return 0;
 }
