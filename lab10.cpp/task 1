@@ -1,0 +1,76 @@
+/*max heap of values 8, 7 , 6 ,5 , 4*/
+
+//code 
+#include <iostream>
+using namespace std;
+
+class maxheap{
+public:
+int arr[100];
+int size;
+
+maxheap(){
+size = 0;
+}
+
+void swapv(int &a,int &b){
+int t=a; a=b; b=t;}
+
+void insertv(int v){
+  arr[++size] = v;
+bubble_up(size);}
+
+void bubble_up(int i){
+int p = i/2;
+while(p>=1 && arr[i] > arr[p]){
+swapv(arr[i],arr[p]);
+i = p;
+p = i/2;}}
+
+// required functions 
+void update_key(int i,int new_val){
+arr[i] = new_val;
+ bubble_up(i);
+heapify(i);}
+
+void heapify(int i){
+int l = 2*i;
+int r = 2*i + 1;
+int largest = i;
+if(l <= size && arr[l] > arr[largest]) largest = l;
+  if(r <= size && arr[r] > arr[largest]) largest = r;
+   if(largest != i){
+swapv(arr[i],arr[largest]);
+heapify(largest);}}
+
+//required function 
+void delete_at(int i){
+arr[i] = arr[size--];
+bubble_up(i);
+heapify(i);}
+
+void printv(){
+for(int i=1;i<=size;i++)
+cout<<arr[i]<<" ";
+cout<<endl;}
+};
+
+int main(){
+maxheap h;
+int v[]={8,7,6,5,4};
+for(int x:v)
+h.insertv(x);
+
+cout<<"initial max heap: ";
+h.printv();
+
+h.update_key(3,10);
+cout<<"after update index 3 to 10: ";
+h.printv();
+h.delete_at(2);
+cout<<"after deleting index 2: ";
+h.printv();}
+
+
+// part 2 
+
