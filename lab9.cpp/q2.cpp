@@ -1,4 +1,4 @@
-//task 2 
+//task 2 from manual 
 //code 
 #include<iostream>
 #include<queue>
@@ -14,14 +14,11 @@ int height;
 node(int val) {
 data = val;
 left = right = nullptr;
-height = 1;
-}
-};
+height = 1;}};
 
 int height(node* n) {
 if (n == nullptr) return 0;
-return n->height;
-}
+return n->height;}
 
 node* leftRotate(node* x) {
 node* y = x->right;
@@ -32,13 +29,9 @@ x->right = T2;
 
 x->height = max(height(x->left), height(x->right)) + 1;
 y->height = max(height(y->left), height(y->right)) + 1;
-
-return y;
-}
-
+return y;}
 node* insert(node* root, int key) {
 if (root == nullptr) return new node(key);
-
 if (key < root->data)
 root->left = insert(root->left, key);
 else if (key > root->data)
@@ -47,8 +40,7 @@ else
 return root;
 
 root->height = 1 + max(height(root->left), height(root->right));
-return root;
-}
+return root;  }
 
 void levelOrder(node* root) {
 if (root == nullptr) return;
@@ -59,13 +51,11 @@ node* curr = q.front();
 q.pop();
 cout << curr->data << " ";
 if (curr->left != nullptr) q.push(curr->left);
-if (curr->right != nullptr) q.push(curr->right);
-}
-}
+if (curr->right != nullptr) q.push(curr->right);}}
 
 int main() {
 node* root = nullptr;
-int arr[] = {50, 30, 70, 20, 40, 60, 80};
+int arr[] = {570, 30, 70, 20, 40, 60, 80};
 for (int i = 0; i < 7; i++) {
 root = insert(root, arr[i]);
 }
@@ -82,6 +72,4 @@ root = leftRotate(root);
 cout << "After left rotation on root: ";
 levelOrder(root);
 cout << endl;
-
-return 0;
-}
+return 0;}
