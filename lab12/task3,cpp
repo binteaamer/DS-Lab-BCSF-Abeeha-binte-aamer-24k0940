@@ -1,0 +1,58 @@
+//code is Bad Character + Good Suffix
+#include<iostream>
+using namespace std;
+
+int main(){
+ string t,p;
+ getline(cin,t);
+ getline(cin,p);
+
+ int n=t.size(), m=p.size();
+ int bc[256];
+ for(int i=0;i<256;i++) bc[i]=m;
+ for(int i=0;i<m-1;i++) bc[(int)p[i]]=m-1-i;
+
+ int *gs=new int[m];
+ int *suf=new int[m];
+ for(int i=0;i<m;i++) suf[i]=0;
+
+ int g=m-1 , f=0;
+ suf[m-1]=m;
+ for(int i=m-2;i>=0;i--){
+  if(i>g && suf[i+m-1-f]<i-g) suf[i]=suf[i+m-1-f];
+  else{
+   if(i<g) g=i;
+   f=i;
+    while(g>=0 && p[g]==p[g+m-1-f]) g--;
+     suf[i]=f-g;
+     } }
+
+for(int i=0;i<m;i++) gs[i]=m;
+ int j=0;
+ for(int i=m-1;i>=0;i--)
+ if(suf[i]==i+1)
+      for(;j<m-1-i;j++)
+      if(gs[j]==m) gs[j]=m-1-i;
+ for(int i=0;i<=m-2;i++)
+     gs[m-1-suf[i]]=m-1-i;
+
+ cout<<"idx: [";
+ bool f2=0;
+ int i=0;
+ while(i<=n-m){
+int j=m-1;
+ while(j>=0 && p[j]==t[i+j]) j--;
+if(j<0){
+if(f2) cout<<", ";
+ cout<<i; f2=1;
+ i+=gs[0];} 
+else {
+    int bcshift = bc[(int)t[i+j]] - (m-1-j);
+    if(bcshift<1) bcshift=1;
+    int sh = bcshift>gs[j] ? bcshift : gs[j];
+    i+=sh;}
+ }
+ cout<<"]";
+ delete[] gs;
+ delete[] suf;
+}
